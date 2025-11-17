@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
 import helmet from "helmet";
-import connectDB from "./config/db.js";
 
 import userRoutes from "./routes/userRoutes.js";
 import journalRoutes from "./routes/journalRoutes.js";
@@ -13,9 +12,6 @@ import suggestionRoutes from "./routes/suggestionRoutes.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
 
 dotenv.config();
-
-// Connect DB
-connectDB();
 
 const app = express();
 
@@ -36,7 +32,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes
 app.use("/api/user", userRoutes);
 app.use("/api/journal", journalRoutes);
 app.use("/api/habit", habitRoutes);
@@ -44,7 +39,6 @@ app.use("/api/burnout", burnoutRoutes);
 app.use("/api/suggest", suggestionRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 
-// Test route
 app.get("/", (req, res) => {
   res.send("🚀 AI Habit Coach Backend is Running...");
 });
