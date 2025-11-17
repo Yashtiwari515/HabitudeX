@@ -11,9 +11,11 @@ async function ensureDBConnected() {
   }
 }
 
-export const handler = async (event, context) => {
+const handlerWrapper = async (event, context) => {
   await ensureDBConnected();
-  return serverless(app)(event, context);
+  const handler = serverless(app);
+  return handler(event, context);
 };
 
-export default handler;
+export const handler = handlerWrapper;
+export default handlerWrapper;
