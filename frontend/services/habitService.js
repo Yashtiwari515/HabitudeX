@@ -1,4 +1,4 @@
-const API_BASE = "http://192.168.29.24:5000/api/habit";
+const API_BASE = "https://habitudex.onrender.com/api/habit";
 
 // Get all habits
 export const getHabits = async (token) => {

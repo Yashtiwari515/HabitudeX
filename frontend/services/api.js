@@ -5,7 +5,7 @@ import { router } from "expo-router"; // 👈 allows navigation outside componen
 import { Alert } from "react-native";
 
 const API = axios.create({
-  baseURL: "http://192.168.29.24:5000/api", // ⚠️ replace with your backend IP if needed
+  baseURL: "https://habitudex.onrender.com/api", // ⚠️ replace with your backend IP if needed
   timeout: 10000,
 });
 
