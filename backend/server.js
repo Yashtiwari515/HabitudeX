@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
 import helmet from "helmet";
+import connectDB from "./config/db.js";
 
 import userRoutes from "./routes/userRoutes.js";
 import journalRoutes from "./routes/journalRoutes.js";
@@ -13,23 +14,18 @@ import dashboardRoutes from "./routes/dashboardRoutes.js";
 
 dotenv.config();
 
+// Connect DB
+connectDB();
+
 const app = express();
 
-// Middleware
 app.use(express.json());
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
 
-app.use((req, res, next) => {
-  res.set("Cache-Control", "no-store");
-  next();
+app.get("/", (req, res) => {
+  res.send("🚀 AI Habit Coach Backend is Running...");
 });
 
 app.use("/api/user", userRoutes);
@@ -39,8 +35,7 @@ app.use("/api/burnout", burnoutRoutes);
 app.use("/api/suggest", suggestionRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 
-app.get("/", (req, res) => {
-  res.send("🚀 AI Habit Coach Backend is Running...");
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
-
-export default app;
