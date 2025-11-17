@@ -7,15 +7,16 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
  */
 export const loginUser = async (email, password) => {
   const res = await API.post("/user/login", { email, password });
-  const { token, user } = res.data;
 
-  // Save token securely for authenticated requests
-  await AsyncStorage.setItem("token", token);
+  // Save token
+  await AsyncStorage.setItem("token", res.data.token);
 
-  // Optional: keep token globally accessible
-  global.authToken = token;
-
-  return user;
+  // RETURN the full user object
+  return {
+    _id: res.data._id,
+    name: res.data.name,
+    email: res.data.email,
+  };
 };
 
 /**
@@ -23,19 +24,18 @@ export const loginUser = async (email, password) => {
  */
 export const registerUser = async (name, email, password) => {
   const res = await API.post("/user/register", { name, email, password });
-  const { token, user } = res.data;
 
-  // Save token securely right after registration
-  await AsyncStorage.setItem("token", token);
+  await AsyncStorage.setItem("token", res.data.token);
 
-  // Optional: set globally for immediate use
-  global.authToken = token;
-
-  return user;
+  return {
+    _id: res.data._id,
+    name: res.data.name,
+    email: res.data.email,
+  };
 };
 
 /**
- * Logout user 
+ * Logout user
  */
 export const logoutUser = async () => {
   await AsyncStorage.removeItem("token");

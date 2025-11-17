@@ -9,14 +9,12 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import { loginUser } from "../../services/authService";
-// import {
-//   registerForPushNotifications,
-//   scheduleHabitReminder,
-//   scheduleJournalReminder,
-// } from "../../utils/notifications";
+import { useUser } from "../../context/UserContext";
 
 export default function LoginScreen() {
   const router = useRouter();
+  const { login } = useUser(); // <-- Save user here
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -26,17 +24,19 @@ export default function LoginScreen() {
 
     try {
       setLoading(true);
-      const user = await loginUser(email, password);
+
+      // backend login → returns user
+      const userData = await loginUser(email, password);
+
+      // save user permanently
+      await login(userData);
+
       Alert.alert("Welcome back! 😎");
-      // await registerForPushNotifications();
-      // await scheduleHabitReminder();
-      // await scheduleJournalReminder();
-      router.replace("/(tabs)"); // Navigate to main app
+      router.replace("/(tabs)");
     } catch (err) {
-      console.log("Login error:", err.response?.data || err.message);
       Alert.alert(
         "Login Failed",
-        err.response?.data?.message || "Something went wrong, check connection."
+        err.response?.data?.message || "Something went wrong."
       );
     } finally {
       setLoading(false);

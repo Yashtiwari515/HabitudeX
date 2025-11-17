@@ -9,9 +9,12 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import { registerUser } from "../../services/authService";
+import { useUser } from "../../context/UserContext";
 
 export default function RegisterScreen() {
   const router = useRouter();
+  const { login } = useUser(); // <-- Save newly registered user
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,11 +24,18 @@ export default function RegisterScreen() {
       return Alert.alert("Error", "All fields required");
 
     try {
-      await registerUser(name, email, password);
-      Alert.alert("Success", "Account created successfully!");
-      router.replace("/Auth/login");
+      const newUser = await registerUser(name, email, password);
+
+      // save new account in storage
+      await login(newUser);
+
+      Alert.alert("Success!", "Account created");
+      router.replace("/(tabs)");
     } catch (err) {
-      Alert.alert("Registration Failed", "Try again later");
+      Alert.alert(
+        "Registration Failed",
+        err.response?.data?.message || "Try again later"
+      );
     }
   };
 
@@ -39,15 +49,12 @@ export default function RegisterScreen() {
         value={name}
         onChangeText={setName}
       />
-
       <TextInput
         style={styles.input}
         placeholder="Email"
-        keyboardType="email-address"
         value={email}
         onChangeText={setEmail}
       />
-
       <TextInput
         style={styles.input}
         placeholder="Password"
