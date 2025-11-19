@@ -72,7 +72,7 @@ export default function HabitListScreen() {
 
       <TouchableOpacity
         style={styles.addButton}
-        onPress={() => router.push("/(tabs)/habit/add")}
+        onPress={() => router.push("/(tabs)/habits/add")}
       >
         <Ionicons name="add" size={28} color="#fff" />
       </TouchableOpacity>

@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import EmotionBadge from "./EmotionBadge";
 import { deleteJournal } from "../services/journalService";
+import * as Clipboard from "expo-clipboard"; // <-- Added
 
 export default function JournalCard({ journal, onDelete }) {
   if (!journal) return null;
@@ -31,6 +32,12 @@ export default function JournalCard({ journal, onDelete }) {
     );
   };
 
+  // ✅ Copy Journal Text
+  const handleCopy = async () => {
+    await Clipboard.setStringAsync(journal.text);
+    Alert.alert("Copied!", "Journal text copied to clipboard.");
+  };
+
   return (
     <View style={styles.card}>
       <View style={styles.header}>
@@ -39,11 +46,19 @@ export default function JournalCard({ journal, onDelete }) {
         </Text>
         <View style={styles.actions}>
           <EmotionBadge emotion={journal.detectedEmotion} />
+
+          {/* ✅ Copy Button */}
+          <TouchableOpacity onPress={handleCopy}>
+            <Ionicons name="copy-outline" size={22} color="#6B7280" />
+          </TouchableOpacity>
+
+          {/* Delete Button */}
           <TouchableOpacity onPress={handleDelete}>
             <Ionicons name="trash-outline" size={22} color="#EF4444" />
           </TouchableOpacity>
         </View>
       </View>
+
       <Text style={styles.text} numberOfLines={3}>
         {journal.text}
       </Text>
@@ -72,7 +87,7 @@ const styles = StyleSheet.create({
   actions: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 10,
+    gap: 12, // wider spacing for clean UI
   },
   date: {
     color: "#6B7280",

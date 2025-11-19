@@ -19,7 +19,8 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "HabitudeXcom.habitudex.app"
     },
     "web": {
       "output": "static",
@@ -28,6 +29,10 @@
     "extra": {
       "expoClient": {
         "projectId": "c99c2434-0f60-438a-a302-903e32391dbd"
+      },
+      "router": {},
+      "eas": {
+        "projectId": "edae71c7-de09-48a0-97e4-87823b00a52e"
       }
     },
     "plugins": [
