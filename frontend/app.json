@@ -1,31 +1,33 @@
 {
   "expo": {
-    "name": "frontend",
-    "slug": "frontend",
+    "name": "HabitudeX",
+    "slug": "habitudex",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "frontend",
+    "icon": "./assets/images/habitudeX.png",
+    "scheme": "habitudex",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+
     "ios": {
       "supportsTablet": true
     },
+
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+        "foregroundImage": "./assets/images/habitudeX.png",
+        "backgroundColor": "#FFFFFF"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "HabitudeXcom.habitudex.app"
+      "package": "com.habitudex.app"
     },
+
     "web": {
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/habitudeX.png"
     },
+
     "extra": {
       "expoClient": {
         "projectId": "c99c2434-0f60-438a-a302-903e32391dbd"
@@ -35,6 +37,7 @@
         "projectId": "edae71c7-de09-48a0-97e4-87823b00a52e"
       }
     },
+
     "plugins": [
       "expo-router",
       [
@@ -50,6 +53,7 @@
         }
       ]
     ],
+
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
