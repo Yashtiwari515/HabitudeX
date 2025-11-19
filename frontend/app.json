@@ -8,11 +8,9 @@
     "scheme": "habitudex",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
-
     "ios": {
       "supportsTablet": true
     },
-
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/habitudeX.png",
@@ -22,22 +20,19 @@
       "predictiveBackGestureEnabled": false,
       "package": "com.habitudex.app"
     },
-
     "web": {
       "output": "static",
       "favicon": "./assets/images/habitudeX.png"
     },
-
     "extra": {
       "expoClient": {
         "projectId": "c99c2434-0f60-438a-a302-903e32391dbd"
       },
       "router": {},
       "eas": {
-        "projectId": "edae71c7-de09-48a0-97e4-87823b00a52e"
+        "projectId": "86557dcd-2d75-4cc0-aa05-b291bd41b7cb"
       }
     },
-
     "plugins": [
       "expo-router",
       [
@@ -53,10 +48,10 @@
         }
       ]
     ],
-
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "owner": "nade_x_torpedo"
   }
 }
